@@ -5,11 +5,16 @@ import Hello from '../components/HelloFromVux.vue'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: 'Hello',
       component: Hello
+    },
+    {
+      path: '/login',
+      component: require('../views/login/index.vue')
     }
   ]
 })
