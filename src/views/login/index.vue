@@ -3,15 +3,11 @@
 </style>
 <template>
   <div class="login">
-      <tab :line-width="4" >
-        <tab-item  selected>登录</tab-item>
-        <tab-item >注册</tab-item>
-      </tab>
-    <group label-width="4em">
-      <x-input title="用户名" v-model="username"></x-input>
-      <x-input title="密码" v-model="password"></x-input>
-    </group>
-    <x-button type="primary" @click.native="login" style="margin-top: 20px">登录</x-button>
+    <tab :line-width="4">
+      <tab-item selected @on-item-click="goLogin">登录</tab-item>
+      <tab-item @on-item-click="goRegister">注册</tab-item>
+    </tab>
+    <router-view></router-view>
   </div>
   </div>
 </template>
@@ -21,12 +17,6 @@
   import wilddog from 'wilddog'
   const APPID = 'yinkongjian'
   export default {
-    data () {
-      return {
-        username: '',
-        password: ''
-      }
-    },
     components: {
       Scroller,
       XButton,
@@ -36,10 +26,16 @@
       Tab,
       TabItem
     },
-    mouted () {
-      console.log('this is login page')
+    created () {
+      console.log('route', this.$route)
     },
     methods: {
+      goLogin () {
+        this.$router.push('/login/signin')
+      },
+      goRegister () {
+        this.$router.push('/login/register')
+      },
       wildDog () {
         const config = {
           syncURL: `https://${APPID}.wilddogio.com` // 输入节点 URL
